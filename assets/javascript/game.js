@@ -32,22 +32,40 @@ var gameVar = {
     //Change word to underscores
     wordUnderscore: function () {
         for (i = 0; i < this.answers.length; i++) {
-            this.displayAnswer.push("_")
+            if (this.answers.charAt(i) !== " ") {
 
+                this.displayAnswer.push("_")
+            } else if(this.answers.charAt(i) === " ") {
+                this.displayAnswer.push(" ")
+            }
+            docAnswer.textContent = this.displayAnswer.join(" ")
+            console.log(this.displayAnswer)
+            console.log(this.answers)
         }
-        docAnswer.textContent = this.displayAnswer.join(" ")
+    },
 
+    //check letters
+    checkLetter: function (x){
+        var inWord = false;
+    for (var i = 0; i < gameVar.answers.length; i++) {
+        if (gameVar.answers[i] === userInput) {
+            inWord = true;
+            console.log(inWord)
+        }
     }
+}
+
 }
 // Player to press a key to begin
 document.onkeyup = function (event) {
-    var letter = event.key.toLowerCase();
+    var userInput = event.key.toLowerCase();
     //If game is inactive: Begin game
     if (gameVar.active === false) {
         gameVar.gameStart();
         gameVar.active = true;
     } //ToDo set else (if?) to get into game
-
+    gameVar.checkLetter(userInput);
+}
 
     //First for loop to house the game
 
@@ -61,4 +79,3 @@ document.onkeyup = function (event) {
 
     //else wins ++ end loop
 
-}
