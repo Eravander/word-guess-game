@@ -16,6 +16,7 @@ var gameVar = {
     incorrect: [], //display incorrect guess
     correct: [], //hold correct guesses so user can't repeat them
     active: false, //determines start text state and entry into game loop
+    userInput: "", //Will be assigned on pressing key
 
     //Declare functions
     gameStart: function () {
@@ -45,12 +46,20 @@ var gameVar = {
     },
 
     //check letters
-    checkLetter: function (x){
-        var inWord = false;
+    checkLetter: function (){
     for (var i = 0; i < gameVar.answers.length; i++) {
-        if (gameVar.answers[i] === userInput) {
-            inWord = true;
-            console.log(inWord)
+        //TODO = Have this store and check guessed correct and incorrect answers. NOT run else if duplicate letter is picked
+        if (this.userInput === this.correct || this.userInput === this.incorrect){ 
+            
+        } else if (gameVar.answers[i] !== this.userInput){
+            this.incorrect.push(this.userInput)
+        }
+        //Not even sure I like this, might reduce this to check the input && whether it was guessed
+        else {
+            this.displayAnswer[i] = this.userInput
+            docAnswer.textContent = this.displayAnswer.join(" ")
+            this.correct.push(this.userInput)
+            console.log(this.correct)
         }
     }
 }
@@ -58,13 +67,14 @@ var gameVar = {
 }
 // Player to press a key to begin
 document.onkeyup = function (event) {
-    var userInput = event.key.toLowerCase();
+    gameVar.userInput = event.key.toLowerCase();
     //If game is inactive: Begin game
     if (gameVar.active === false) {
         gameVar.gameStart();
         gameVar.active = true;
-    } //ToDo set else (if?) to get into game
-    gameVar.checkLetter(userInput);
+    } 
+    //Callback to check letter function which is the meat of the game
+    gameVar.checkLetter();
 }
 
     //First for loop to house the game
