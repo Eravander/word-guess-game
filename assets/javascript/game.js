@@ -2,30 +2,31 @@
 var begin = document.getElementById("start"); //display = none during game
 var winCount = document.getElementById("wins");
 var docAnswer = document.getElementById("word"); //Place underscores here
-var userGuess = document.getElementById("guessed"); //append incorrect letters
+var userGuess = document.getElementById("guessed"); //guesses
 var guessLeft = document.getElementById("guesses"); //number of guesses remaining
+var loseCount = document.getElementById("losses");
 
 //Declare game variables
 var gameVar = {
 
     userWins: 0,
+    userLose: 0,
     toWin: 0,
-    guessRemaining: 10,
+    guessRemaining: 13,
     wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech'],
     answers: [],
     displayAnswer: [], //display correct letter and _
-    incorrect: [], //display incorrect guess
-    correct: [], //hold correct guesses so user can't repeat them
     guessed: [], //holds all guessed letters
     active: false, //determines start text state and entry into game loop
     userInput: "", //Will be assigned on pressing key
 
     //Declare functions
     gameStart: function () {
-        this.guessRemaining = 10;
+        this.guessRemaining = 13;
         this.incorrect = [];
         this.correct = [];
         this.displayAnswer = [];
+        this.guessed = [];
         //Pick word from array and load word into div _ _ _ _
         var ranNum = Math.floor(Math.random() * this.wordList.length);
         this.answers = this.wordList[ranNum];
@@ -52,36 +53,43 @@ var gameVar = {
     //check letters
     checkLetter: function () {
 
-        if (this.guessed.indexOf(this.userInput) == [-1]); {
+        if (this.guessed.indexOf(this.userInput) == [-1]) {
             console.log(this.userInput)
-
             for (var i = 0; i < gameVar.answers.length; i++) {
-                //TODO = Have this store and check guessed correct and incorrect answers. NOT run else if duplicate letter is picked
-                if (gameVar.answers[i] !== this.userInput) {
-                    this.incorrect.push(this.userInput);
-                    this.guessed.push(this.userInput);
-                }
-                //Not even sure I like this, might reduce this to check the input && whether it was guessed
-                else {
+
+                if (gameVar.answers[i] === this.userInput) {
                     this.displayAnswer[i] = this.userInput
                     docAnswer.textContent = this.displayAnswer.join(" ")
-                    this.correct.push(this.userInput);
-                    this.guessed.push(this.userInput);
-                    console.log(this.guessed)
-                    console.log(gameVar.toWin)
+                    gameVar.toWin--;
                 }
             }
+            //updates guesses
+                this.guessed.push(this.userInput);
+                this.guessRemaining--;
+                guessLeft.textContent = ("Number of Guesses Remaining: " + this.guessRemaining);
+                userGuess.textContent = ("Letters already guessed: " + this.guessed.join(" "));
+
+
         }
-        if (gameVar.toWin <= 0){
+        //Loss check
+        if (this.guessRemaining <= 0){
+            gameVar.userLose ++;
+            loseCount.textContent = ("Losses: " + gameVar.userLose)
             gameVar.active = false;
-            alert("You win!")
         }
-    }    
+        //Win check
+        if (gameVar.toWin <= 0) {
+            gameVar.active = false;
+            gameVar.userWins ++;
+            winCount.textContent = ("Wins: " + gameVar.userWins)
+        }
+    }
 }
 
 
 // Player to press a key to begin
 document.onkeyup = function (event) {
+    begin.style.display = "none";
     gameVar.userInput = event.key.toLowerCase();
     //If game is inactive: Begin game
     if (gameVar.active === false) {
