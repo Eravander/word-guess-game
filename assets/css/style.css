@@ -1,0 +1,12 @@
+body{
+  background-color: black;
+}
+
+#guessP{
+  text-decoration: underline;
+}
+
+.jumbotron{
+  margin-top: 10px;
+}
+

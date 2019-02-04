@@ -13,12 +13,13 @@ var gameVar = {
     userLose: 0,
     toWin: 0,
     guessRemaining: 13,
-    wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech', 'anthem', 'Borderlands'],
+    wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech', 'anthem', 'borderlands'],
     answers: [],
     displayAnswer: [], //display correct letter and _
     guessed: [], //holds all guessed letters
     active: false, //determines start text state and entry into game loop
     userInput: "", //Will be assigned on pressing key
+    proceed: false, //var for function to check if key is letter
 
     //Declare functions
     gameStart: function () {
@@ -64,24 +65,34 @@ var gameVar = {
                 }
             }
             //updates guesses
-                this.guessed.push(this.userInput);
-                this.guessRemaining--;
-                guessLeft.textContent = ("Number of Guesses Remaining: " + this.guessRemaining);
-                userGuess.textContent = ("Letters already guessed: " + this.guessed.join(" "));
+            this.guessed.push(this.userInput);
+            this.guessRemaining--;
+            guessLeft.textContent = ("Number of Guesses Remaining: " + this.guessRemaining);
+            userGuess.textContent = (this.guessed.join(" "));
 
 
         }
         //Loss check
-        if (this.guessRemaining <= 0){
-            gameVar.userLose ++;
+        if (this.guessRemaining <= 0) {
+            gameVar.userLose++;
             loseCount.textContent = ("Losses: " + gameVar.userLose)
             gameVar.active = false;
+            begin.style.display = "initial";
         }
         //Win check
         if (gameVar.toWin <= 0) {
             gameVar.active = false;
-            gameVar.userWins ++;
+            gameVar.userWins++;
             winCount.textContent = ("Wins: " + gameVar.userWins)
+            begin.style.display = "initial";
+        }
+    },
+    // key event to guess a letter that's actually a letter
+    keyLetter: function () {
+        document.onkeyup = function (event) {
+            if (event.keyCode >= 65 && event.keyCode <= 90) {
+                gameVar.proceed = true;
+            }
         }
     }
 }
@@ -89,6 +100,8 @@ var gameVar = {
 
 // Player to press a key to begin
 document.onkeyup = function (event) {
+    // keyLetter();
+   
     begin.style.display = "none";
     gameVar.userInput = event.key.toLowerCase();
     //If game is inactive: Begin game
@@ -97,18 +110,14 @@ document.onkeyup = function (event) {
         gameVar.active = true;
     }
     //Callback to check letter function which is the meat of the game
+   
+  
     gameVar.checkLetter();
+   
+
 }
 
-    //First for loop to house the game
-
-    //Second For loop checking guess against answer
-
-    //if guess = letter in word then reveal letter
-
-    //else if letter guessed = nothing
-
-    //else if deduct from guesses and add to guessed
-
-    //else wins ++ end loop
+    //Known bugs: Spaces in answer cause problems throughout code. Counting towards answer length, not appear, etc.
+    //Occassionally game sets win one guess too early, no consistency makes it hard to pin down issue
+    //Implementing check letter function
 

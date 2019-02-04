@@ -6,24 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Guess Game!</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets\css\style.css">
 </head>
 
 <body>
-    <h1 id="start">Press any key to get started</h1>
 
-    <p id="wins">Wins: </p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
 
-    <p id="losses">Losses: </p>
+                <div class="col-8">
+                    </div>
+                    <div class="jumbotron">
+                        <h1 class="display-4" id="start">Press any key to get started</h1>
+                        <p class="lead" id="word">Word to guess will go here</p>
+                        <hr class="my-4">
+                        <div id="stats">
+                        <p id="wins">Wins: </p>
 
-    <p id="word">Word to guess will go here</p>
+                        <p id="losses">Losses: </p>
 
-    <p id="guesses">Number of Guesses Remaining</p>
+                        <p id="guesses">Number of Guesses Remaining</p>
+                    </div>
+                    <div id="letterLand">
+                        <p id="guessP">Letters already guessed</p>
+                        <p id="guessed"></p>
+                    </div>
+                        <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
 
-    <p id="guessed">Letters already guessed</p>
+
+                    </div>
 
 
-    <script src="assets\javascript\game.js"></script>
+                
+                <div class="col">
+
+                </div>
+            </div>
+        </div>
+
+
+        <script src="assets\javascript\game.js"></script>
 </body>
 
 </html>
