@@ -13,7 +13,7 @@ var gameVar = {
     userLose: 0,
     toWin: 0,
     guessRemaining: 13,
-    wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech'],
+    wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech', 'anthem', 'Borderlands'],
     answers: [],
     displayAnswer: [], //display correct letter and _
     guessed: [], //holds all guessed letters
