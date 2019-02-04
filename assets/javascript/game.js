@@ -11,7 +11,7 @@ var gameVar = {
     userWins: 0,
     guessRemaining: 10,
     wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech'],
-    answers: "",
+    answers: [],
     displayAnswer: [], //display correct letter and _
     incorrect: [], //display incorrect guess
     correct: [], //hold correct guesses so user can't repeat them
@@ -48,30 +48,30 @@ var gameVar = {
 
     //check letters
     checkLetter: function () {
-        
-            if (this.userInput === this.guessed.indexOf(-1)); {
 
+        if (this.guessed.indexOf(this.userInput) == [-1]); {
+            console.log(this.userInput)
 
-                for (var i = 0; i < gameVar.answers.length; i++) {
-                    //TODO = Have this store and check guessed correct and incorrect answers. NOT run else if duplicate letter is picked
-                    if (gameVar.answers[i] !== this.userInput) {
-                        this.incorrect.push(this.userInput);
-                        this.guessed.push(this.userInput);
-                    }
-                    //Not even sure I like this, might reduce this to check the input && whether it was guessed
-                    else {
-                        this.displayAnswer[i] = this.userInput
-                        docAnswer.textContent = this.displayAnswer.join(" ")
-                        this.correct.push(this.userInput);
-                        this.guessed.push(this.userInput);
-                        console.log(this.guessed)
-                    }
+            for (var i = 0; i < gameVar.answers.length; i++) {
+                //TODO = Have this store and check guessed correct and incorrect answers. NOT run else if duplicate letter is picked
+                if (gameVar.answers[i] !== this.userInput) {
+                    this.incorrect.push(this.userInput);
+                    this.guessed.push(this.userInput);
+                }
+                //Not even sure I like this, might reduce this to check the input && whether it was guessed
+                else {
+                    this.displayAnswer[i] = this.userInput
+                    docAnswer.textContent = this.displayAnswer.join(" ")
+                    this.correct.push(this.userInput);
+                    this.guessed.push(this.userInput);
+                    console.log(this.guessed)
                 }
             }
-        
-    }
-
+        }
+    }    
 }
+
+
 // Player to press a key to begin
 document.onkeyup = function (event) {
     gameVar.userInput = event.key.toLowerCase();
