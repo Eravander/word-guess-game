@@ -9,6 +9,7 @@ var guessLeft = document.getElementById("guesses"); //number of guesses remainin
 var gameVar = {
 
     userWins: 0,
+    toWin: 0,
     guessRemaining: 10,
     wordList: ['overwatch', 'darksiders', 'slay the spire', 'nantucket', 'dead by daylight', 'total war', 'battletech'],
     answers: [],
@@ -40,10 +41,12 @@ var gameVar = {
             } else if (this.answers.charAt(i) === " ") {
                 this.displayAnswer.push("-")
             }
-            docAnswer.textContent = this.displayAnswer.join(" ")
             console.log(this.displayAnswer)
             console.log(this.answers)
         }
+        docAnswer.textContent = this.displayAnswer.join(" ")
+        gameVar.toWin = i;
+        console.log(gameVar.toWin)
     },
 
     //check letters
@@ -65,8 +68,13 @@ var gameVar = {
                     this.correct.push(this.userInput);
                     this.guessed.push(this.userInput);
                     console.log(this.guessed)
+                    console.log(gameVar.toWin)
                 }
             }
+        }
+        if (gameVar.toWin <= 0){
+            gameVar.active = false;
+            alert("You win!")
         }
     }    
 }
