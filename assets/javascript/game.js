@@ -15,6 +15,7 @@ var gameVar = {
     displayAnswer: [], //display correct letter and _
     incorrect: [], //display incorrect guess
     correct: [], //hold correct guesses so user can't repeat them
+    guessed: [], //holds all guessed letters
     active: false, //determines start text state and entry into game loop
     userInput: "", //Will be assigned on pressing key
 
@@ -36,8 +37,8 @@ var gameVar = {
             if (this.answers.charAt(i) !== " ") {
 
                 this.displayAnswer.push("_")
-            } else if(this.answers.charAt(i) === " ") {
-                this.displayAnswer.push(" ")
+            } else if (this.answers.charAt(i) === " ") {
+                this.displayAnswer.push("-")
             }
             docAnswer.textContent = this.displayAnswer.join(" ")
             console.log(this.displayAnswer)
@@ -46,23 +47,29 @@ var gameVar = {
     },
 
     //check letters
-    checkLetter: function (){
-    for (var i = 0; i < gameVar.answers.length; i++) {
-        //TODO = Have this store and check guessed correct and incorrect answers. NOT run else if duplicate letter is picked
-        if (this.userInput === this.correct || this.userInput === this.incorrect){ 
-            
-        } else if (gameVar.answers[i] !== this.userInput){
-            this.incorrect.push(this.userInput)
-        }
-        //Not even sure I like this, might reduce this to check the input && whether it was guessed
-        else {
-            this.displayAnswer[i] = this.userInput
-            docAnswer.textContent = this.displayAnswer.join(" ")
-            this.correct.push(this.userInput)
-            console.log(this.correct)
+    checkLetter: function () {
+        for (var j = 0; j < gameVar.guessed.length; j++) {
+            if (this.userInput !== this.guessed.indexOf(userInput)); {
+
+
+                for (var i = 0; i < gameVar.answers.length; i++) {
+                    //TODO = Have this store and check guessed correct and incorrect answers. NOT run else if duplicate letter is picked
+                    if (gameVar.answers[i] !== this.userInput) {
+                        this.incorrect.push(this.userInput);
+                        this.guessed.push(this.userInput);
+                    }
+                    //Not even sure I like this, might reduce this to check the input && whether it was guessed
+                    else {
+                        this.displayAnswer[i] = this.userInput
+                        docAnswer.textContent = this.displayAnswer.join(" ")
+                        this.correct.push(this.userInput);
+                        this.guessed.push(this.userInput);
+                        console.log(this.guessed)
+                    }
+                }
+            }
         }
     }
-}
 
 }
 // Player to press a key to begin
@@ -72,7 +79,7 @@ document.onkeyup = function (event) {
     if (gameVar.active === false) {
         gameVar.gameStart();
         gameVar.active = true;
-    } 
+    }
     //Callback to check letter function which is the meat of the game
     gameVar.checkLetter();
 }
