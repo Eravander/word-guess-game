@@ -48,8 +48,8 @@ var gameVar = {
 
     //check letters
     checkLetter: function () {
-        for (var j = 0; j < gameVar.guessed.length; j++) {
-            if (this.userInput !== this.guessed.indexOf(userInput)); {
+        
+            if (this.userInput === this.guessed.indexOf(-1)); {
 
 
                 for (var i = 0; i < gameVar.answers.length; i++) {
@@ -68,7 +68,7 @@ var gameVar = {
                     }
                 }
             }
-        }
+        
     }
 
 }
