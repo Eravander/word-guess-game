@@ -73,7 +73,7 @@ var gameVar = {
 
         }
         //Loss check
-        if (this.guessRemaining <= 0) {
+        if (this.guessRemaining <= 0 && gameVar.toWin !== 0) {
             gameVar.userLose++;
             loseCount.textContent = ("Losses: " + gameVar.userLose)
             gameVar.active = false;
@@ -87,7 +87,7 @@ var gameVar = {
             begin.style.display = "initial";
         }
     },
-    // key event to guess a letter that's actually a letter
+    // key event to check a letter that's actually a letter
     keyLetter: function () {
         document.onkeyup = function (event) {
             if (event.keyCode >= 65 && event.keyCode <= 90) {
