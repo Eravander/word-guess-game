@@ -31,6 +31,7 @@ var gameVar = {
         //Pick word from array and load word into div _ _ _ _
         var ranNum = Math.floor(Math.random() * this.wordList.length);
         this.answers = this.wordList[ranNum];
+        this.toWin = this.answers.length;
         this.wordUnderscore();
     },
 
@@ -41,13 +42,13 @@ var gameVar = {
 
                 this.displayAnswer.push("_")
             } else if (this.answers.charAt(i) === " ") {
-                this.displayAnswer.push("-")
+                this.displayAnswer.push("  ")
+                this.toWin--;
             }
             console.log(this.displayAnswer)
             console.log(this.answers)
         }
-        docAnswer.textContent = this.displayAnswer.join(" ")
-        gameVar.toWin = i;
+        docAnswer.textContent = this.displayAnswer.join("")
         console.log(gameVar.toWin)
     },
 
@@ -60,7 +61,7 @@ var gameVar = {
 
                 if (gameVar.answers[i] === this.userInput) {
                     this.displayAnswer[i] = this.userInput
-                    docAnswer.textContent = this.displayAnswer.join(" ")
+                    docAnswer.textContent = this.displayAnswer.join("")
                     gameVar.toWin--;
                 }
             }
@@ -78,6 +79,7 @@ var gameVar = {
             loseCount.textContent = ("Losses: " + gameVar.userLose)
             gameVar.active = false;
             begin.style.display = "initial";
+            begin.textContent - "You Lost! Press a key to play again!"
         }
         //Win check
         if (gameVar.toWin <= 0) {
@@ -85,6 +87,7 @@ var gameVar = {
             gameVar.userWins++;
             winCount.textContent = ("Wins: " + gameVar.userWins)
             begin.style.display = "initial";
+            begin.textContent - "You Won! Press a key to play again!"
         }
     },
     // key event to check a letter that's actually a letter
