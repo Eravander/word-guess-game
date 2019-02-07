@@ -120,7 +120,5 @@ document.onkeyup = function (event) {
 
 }
 
-    //Known bugs: Spaces in answer cause problems throughout code. Counting towards answer length, not appear, etc.
-    //Occassionally game sets win one guess too early, no consistency makes it hard to pin down issue
     //Implementing check letter function
 
