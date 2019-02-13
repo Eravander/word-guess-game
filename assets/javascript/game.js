@@ -92,20 +92,15 @@ var gameVar = {
             begin.textContent - "You Won! Press a key to play again!"
         }
     },
-    // key event to check a letter that's actually a letter
-    keyLetter: function () {
-        document.onkeyup = function (event) {
-            if (event.keyCode >= 65 && event.keyCode <= 90) {
-                gameVar.proceed = true;
-            }
-        }
-    }
+    
+    
 }
 
 
 // Player to press a key to begin
 document.onkeyup = function (event) {
-    // keyLetter();
+    // key event to check a letter that's actually a letter
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
    
     begin.style.display = "none";
     gameVar.userInput = event.key.toLowerCase();
@@ -119,7 +114,7 @@ document.onkeyup = function (event) {
   
     gameVar.checkLetter();
    
-
+    }
 }
 
     //Implementing check letter function
