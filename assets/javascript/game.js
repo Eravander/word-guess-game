@@ -54,7 +54,7 @@ var gameVar = {
 
     //check letters
     checkLetter: function () {
-
+        var correct = false;
         if (this.guessed.indexOf(this.userInput) == [-1]) {
             console.log(this.userInput)
             for (var i = 0; i < gameVar.answers.length; i++) {
@@ -63,11 +63,13 @@ var gameVar = {
                     this.displayAnswer[i] = this.userInput
                     docAnswer.textContent = this.displayAnswer.join("")
                     gameVar.toWin--;
+                    correct = true;
                 }
             }
             //updates guesses
             this.guessed.push(this.userInput);
-            this.guessRemaining--;
+            if (!correct){
+            this.guessRemaining--;}
             guessLeft.textContent = ("Number of Guesses Remaining: " + this.guessRemaining);
             userGuess.textContent = (this.guessed.join(" "));
 
